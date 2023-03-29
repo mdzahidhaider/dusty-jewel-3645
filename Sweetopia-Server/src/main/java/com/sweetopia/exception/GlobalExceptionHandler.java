@@ -32,5 +32,29 @@ public class GlobalExceptionHandler {
 		
 		return new ResponseEntity<>(ed,HttpStatus.BAD_REQUEST);
 	}
+	
+	
+	/* Exception handler for Order Bill Not Found*/
+	@ExceptionHandler(OrderBillNotFoundException.class)
+	public ResponseEntity<String> OrdrBillNotFoundException(OrderBillNotFoundException obnf, WebRequest wr){
+		ErrorDetails ed = new ErrorDetails();
+		ed.setTimestamp(LocalDate.now());
+		ed.setMessage(obnf.getMessage());
+		ed.setDetails(wr.getDescription(false));
+		
+		return new ResponseEntity<>("OrderBill Not Found "+ed, HttpStatus.BAD_REQUEST);
+		
+	}
+	/* Exception handler for Order Not Found*/
+	@ExceptionHandler(OrderNotFoundException.class)
+	public ResponseEntity<String> OrdrNotFoundException(OrderNotFoundException onf, WebRequest wr){
+		ErrorDetails ed = new ErrorDetails();
+		ed.setTimestamp(LocalDate.now());
+		ed.setMessage(onf.getMessage());
+		ed.setDetails(wr.getDescription(false));
+		
+		return new ResponseEntity<>("Order Not Found "+ed, HttpStatus.BAD_REQUEST);
+		
+	}
 
 }
