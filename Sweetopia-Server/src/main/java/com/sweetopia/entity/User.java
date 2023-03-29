@@ -20,7 +20,7 @@ public class User {
 	private Long id;
 	@NotNull
 	private String userName;
-	@Pattern(regexp = "")
+	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z]).{8,}$", message = "Eight characters long and at least one upper and one lower")
 	private String userPassword;
 	@Pattern(regexp = "^(admin|customer)$", message = "Type can only be admin or customer")
 	private String userType;
