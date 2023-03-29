@@ -10,16 +10,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-public abstract class User {
+@NoArgsConstructor
+@AllArgsConstructor
+public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotNull
-	private String name;
+	private String userName;
 	@Pattern(regexp = "")
-	private String password;
+	private String userPassword;
 	@Pattern(regexp = "^(admin|customer)$", message = "Type can only be admin or customer")
-	private String type;
+	private String userType;
 	
 
 }
