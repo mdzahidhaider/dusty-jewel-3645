@@ -2,13 +2,18 @@ package com.sweetopia.service.implementation;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sweetopia.entity.User;
+import com.sweetopia.repository.UserRepository;
 import com.sweetopia.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService{
+	
+	@Autowired
+	private UserRepository userRepository;
 
 	@Override
 	public User addUser(User newUser) {
