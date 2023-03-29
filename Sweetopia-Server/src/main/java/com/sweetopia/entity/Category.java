@@ -5,4 +5,7 @@ import jakarta.persistence.Entity;
 @Entity
 public class Category {
 
+	private Integer categoryId;
+	
+	
 }
