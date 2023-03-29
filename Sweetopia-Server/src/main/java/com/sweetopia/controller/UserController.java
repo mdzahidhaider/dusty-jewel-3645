@@ -19,6 +19,7 @@ import com.sweetopia.service.UserService;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.validation.Valid;
 
 @RestController
 public class UserController {
@@ -31,7 +32,7 @@ public class UserController {
 	
 	
 	@PostMapping("/add")
-	public ResponseEntity<User> addUser(@RequestBody User user){
+	public ResponseEntity<User> addUser(@Valid @RequestBody User user){
 		User addedUser = userService.addUser(user);
 		return new ResponseEntity<>(addedUser,HttpStatus.CREATED);
 	}
@@ -46,7 +47,7 @@ public class UserController {
 	
 //	????????????
 	@PatchMapping("/update/{id}")
-	public ResponseEntity<User> updateUserDetails(@RequestBody User user, @PathVariable Long id) throws UserNotFoundException{
+	public ResponseEntity<User> updateUserDetails(@Valid @RequestBody User user, @PathVariable Long id) throws UserNotFoundException{
 		
 		user = entityManager.find(User.class, id);
 		if(user!=null) {
