@@ -47,15 +47,22 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public String deleteUser(Long id) {
+	public String deleteUser(Long id) throws UserNotFoundException {
 		// TODO Auto-generated method stub
-		return null;
+		Optional<User> opt = userRepository.findById(id);
+		if(opt.isPresent()) {
+			userRepository.deleteById(id);
+			return "User has been successfully deleted";
+		}else
+			throw new UserNotFoundException();
+		
 	}
 
 	@Override
 	public String deleteAllUser() {
 		// TODO Auto-generated method stub
-		return null;
+		userRepository.deleteAll();
+		return "All users are successfully deleted";
 	}
 
 }

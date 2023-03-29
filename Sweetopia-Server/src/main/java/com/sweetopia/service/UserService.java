@@ -10,7 +10,7 @@ public interface UserService {
 	public User addUser(User newUser);
 	public List<User> getAllUser() throws UserNotFoundException;
 	public User updateUserDetails(User user) throws UserNotFoundException;
-	public String deleteUser(Long id);
+	public String deleteUser(Long id) throws UserNotFoundException;
 	public String deleteAllUser();
 	
 }
