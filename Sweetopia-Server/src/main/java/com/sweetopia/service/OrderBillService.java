@@ -1,5 +1,7 @@
 package com.sweetopia.service;
 
+import java.util.List;
+
 import com.sweetopia.entity.OrderBill;
 import com.sweetopia.exception.OrderBillNotFoundException;
 
@@ -16,7 +18,7 @@ public interface OrderBillService {
 	public OrderBill cancelOrderBill(Integer orderBillId) throws OrderBillNotFoundException;
 	
 	//method for show All order bills
-	public OrderBill showAllOrderBills() throws OrderBillNotFoundException;
+	public List<OrderBill> showAllOrderBills() throws OrderBillNotFoundException;
 	
 	//method for show All order bill
 	public OrderBill showAllOrderBillsById(Integer orderBillId) throws OrderBillNotFoundException;

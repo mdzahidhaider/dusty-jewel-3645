@@ -16,7 +16,7 @@ public interface OrderService {
 	public List<Order> showAllSweetOrder() throws OrderNotFoundException;
 	
 	
-	public List<Order> showAllSweetOrderById(Integer orderId) throws OrderNotFoundException;
+	public Order showAllSweetOrderById(Integer orderId) throws OrderNotFoundException;
 	
 	public double calculateTotalOrdercost(Integer orderId) throws OrderNotFoundException;
 	
