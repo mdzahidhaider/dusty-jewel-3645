@@ -13,12 +13,12 @@ public interface OrderBillService {
 	public OrderBill updateOrderBill(OrderBill orderbill) throws OrderBillNotFoundException;
 	
 	//method for cancel order bill
-	public OrderBill cancelOrderBill(Integer orderBillId) throws OrderBillNotFoundException;
+	public OrderBill cancelOrderBill(Long orderBillId) throws OrderBillNotFoundException;
 	
 	//method for show All order bills
 	public OrderBill showAllOrderBills() throws OrderBillNotFoundException;
 	
 	//method for show All order bill
-	public OrderBill showAllOrderBillsById(Integer orderBillId) throws OrderBillNotFoundException;
+	public OrderBill showAllOrderBillsById(Long orderBillId) throws OrderBillNotFoundException;
 
 }

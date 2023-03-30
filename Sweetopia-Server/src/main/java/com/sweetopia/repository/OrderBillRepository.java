@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.sweetopia.entity.OrderBill;
 
-public interface OrderBillRepository extends JpaRepository<OrderBill, Integer>{
+public interface OrderBillRepository extends JpaRepository<OrderBill, Long>{
 
 }
+

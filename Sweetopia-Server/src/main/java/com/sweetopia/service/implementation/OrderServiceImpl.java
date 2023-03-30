@@ -38,7 +38,7 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public Order cancelSweetOrder(Integer orderId) throws OrderNotFoundException {
+	public Order cancelSweetOrder(Long orderId) throws OrderNotFoundException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -50,13 +50,13 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public List<Order> showAllSweetOrderById(Integer orderId) throws OrderNotFoundException {
+	public List<Order> showAllSweetOrderById(Long orderId) throws OrderNotFoundException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public double calculateTotalOrdercost(Integer orderId) throws OrderNotFoundException {
+	public double calculateTotalOrdercost(Long orderId) throws OrderNotFoundException {
 		// TODO Auto-generated method stub
 		return 0;
 	}

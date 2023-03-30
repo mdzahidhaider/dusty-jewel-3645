@@ -11,14 +11,14 @@ public interface OrderService {
 	
 	public Order updateSweetOrder(Order order) throws OrderNotFoundException;
 	
-	public Order cancelSweetOrder(Integer orderId) throws OrderNotFoundException;
+	public Order cancelSweetOrder(Long orderId) throws OrderNotFoundException;
 	
 	public List<Order> showAllSweetOrder() throws OrderNotFoundException;
 	
 	
-	public List<Order> showAllSweetOrderById(Integer orderId) throws OrderNotFoundException;
+	public List<Order> showAllSweetOrderById(Long orderId) throws OrderNotFoundException;
 	
-	public double calculateTotalOrdercost(Integer orderId) throws OrderNotFoundException;
+	public double calculateTotalOrdercost(Long orderId) throws OrderNotFoundException;
 	
 
 }

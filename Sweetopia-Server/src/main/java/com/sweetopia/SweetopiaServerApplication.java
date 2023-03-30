@@ -8,6 +8,9 @@ public class SweetopiaServerApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SweetopiaServerApplication.class, args);
+
+
+
 	}
 
 }

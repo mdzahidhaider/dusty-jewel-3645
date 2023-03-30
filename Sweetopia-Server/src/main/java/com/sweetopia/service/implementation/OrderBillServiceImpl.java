@@ -22,7 +22,7 @@ public class OrderBillServiceImpl implements OrderBillService {
 	}
 
 	@Override
-	public OrderBill cancelOrderBill(Integer orderBillId) throws OrderBillNotFoundException {
+	public OrderBill cancelOrderBill(Long orderBillId) throws OrderBillNotFoundException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -34,7 +34,7 @@ public class OrderBillServiceImpl implements OrderBillService {
 	}
 
 	@Override
-	public OrderBill showAllOrderBillsById(Integer orderBillId) throws OrderBillNotFoundException {
+	public OrderBill showAllOrderBillsById(Long orderBillId) throws OrderBillNotFoundException {
 		// TODO Auto-generated method stub
 		return null;
 	}

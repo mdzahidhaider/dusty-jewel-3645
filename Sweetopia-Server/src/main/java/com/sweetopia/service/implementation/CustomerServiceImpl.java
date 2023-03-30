@@ -30,9 +30,9 @@ public class CustomerServiceImpl implements CustomerService{
 		
 		ValidateCustomer(customer);
 		
-		Customer existingCustomer = customerRepository.findById(customer.getUserId()).orElseThrow(()-> new CustomerNotFoundException("customer not found with this id : "+customer.getUserId()));
-		existingCustomer.setUsername(customer.getUsername());
-		existingCustomer.setSweetOrders(customer.getSweetOrders());
+		Customer existingCustomer = customerRepository.findById(customer.getId()).orElseThrow(()-> new CustomerNotFoundException("customer not found with this id : "+customer.getId()));
+		existingCustomer.setUserName(customer.getUserName());
+		existingCustomer.setOrders(customer.getOrders());
 		existingCustomer.setCart(customer.getCart());
 		
 		return customerRepository.saveAndFlush(existingCustomer);
@@ -66,16 +66,16 @@ public class CustomerServiceImpl implements CustomerService{
 			throw new InvalidCustomerException("Customer can not be null");
 		}
 		
-		if(customer.getUsername()== null || customer.getUsername().isEmpty()) {
+		if(customer.getUserName()== null || customer.getUserName().isEmpty()) {
 			throw new InvalidCustomerException("Customer username can not be null or empty ");
 		}
 		
-		if(customer.getSweetOrders()== null || customer.getSweetOrders().isEmpty()) {
+		if(customer.getOrders()== null || customer.getOrders().isEmpty()) {
 			throw new InvalidCustomerException("Customer must have at least one sweet order");
 		}
 		
-		for(Order order: customer.getSweetOrders()) {
-			if(order.getProducts()== null || order.getProducts().isEmpty()) {
+		for(Order order: customer.getOrders()) {
+			if(order.getGroupedProducts()== null || order.getGroupedProducts().isEmpty()) {
 				throw new InvalidCustomerException("Sweet order must have at least one product");
 			}
 		}

@@ -18,15 +18,24 @@ import lombok.*;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer orderId;
-    
-    @ManyToOne
-    private User userType;
-    @JsonFormat(pattern="yyyy/MM/dd")
+    private Long orderId;
+
+
+
+    @JsonFormat(pattern = "yyyy/MM/dd")
     private LocalDate createdDate;
-    
+
     @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "order_products")
     @MapKeyJoinColumn(name = "product_id")
     @Column(name = "quantity")
     private Map<Product, Long> groupedProducts;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
+    @OneToOne
+    @JoinColumn(name = "order_bill_id")
+    private OrderBill orderBill;
 }

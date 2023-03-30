@@ -6,7 +6,7 @@ import com.sweetopia.entity.Customer;
 
 public interface CustomerRepository extends JpaRepository<Customer, Long>{
 
-	Customer addCustomer(Customer customer);
+//	Customer addCustomer(Customer customer);
 
 	
 }

@@ -8,7 +8,7 @@ public interface CartService {
 
 	public Cart addCart(Cart cart);
 	public Cart updateCart(Cart cart);
-	public Cart cancelCart(int cartId);
+	public Cart cancelCart(Long cartId);
 	public List<Cart> showAllCarts();
-	public List<Cart> showAllCarts(int cartId);
+	public List<Cart> showAllCarts(Long cartId);
 }

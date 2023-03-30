@@ -20,7 +20,7 @@ public class CartServiceImpl implements CartService{
 	}
 
 	@Override
-	public Cart cancelCart(int cartId) {
+	public Cart cancelCart(Long cartId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -32,7 +32,7 @@ public class CartServiceImpl implements CartService{
 	}
 
 	@Override
-	public List<Cart> showAllCarts(int cartId) {
+	public List<Cart> showAllCarts(Long cartId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
