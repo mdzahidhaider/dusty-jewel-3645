@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sweetopia.entity.Customer;
 import com.sweetopia.entity.Order;
+import com.sweetopia.entity.User;
 import com.sweetopia.exception.CustomerNotFoundException;
 import com.sweetopia.exception.InvalidCustomerException;
 import com.sweetopia.repository.CustomerRepository;
@@ -32,6 +33,8 @@ public class CustomerServiceImpl implements CustomerService{
 		
 		Customer existingCustomer = customerRepository.findById(customer.getId()).orElseThrow(()-> new CustomerNotFoundException("customer not found with this id : "+customer.getId()));
 		existingCustomer.setUserName(customer.getUserName());
+		
+		
 		existingCustomer.setOrders(customer.getOrders());
 		existingCustomer.setCart(customer.getCart());
 		
