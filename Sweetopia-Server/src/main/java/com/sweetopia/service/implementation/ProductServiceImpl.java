@@ -1,10 +1,14 @@
 package com.sweetopia.service.implementation;
 
+import com.sweetopia.entity.Category;
 import com.sweetopia.entity.Product;
 import com.sweetopia.exception.ProductException;
 import com.sweetopia.repository.ProductRepository;
+//import com.sweetopia.repository.CategoryRepository;
 import com.sweetopia.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +18,8 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
+//    @Autowired
+//    private CategoryRepository categoryRepository;
 
 
     @Override
@@ -22,6 +28,8 @@ public class ProductServiceImpl implements ProductService {
             Long id=product.getProductId();
             if(productRepository.findById(id).isPresent())throw new ProductException("Product already present");
         }
+//        Optional<Category> category=categoryRepository.findByCategoryName(product.getCategory().getCategoryName());
+//        if(category.isPresent())product.setCategory(category.get());
         return productRepository.save(product);
     }
 
@@ -59,5 +67,13 @@ public class ProductServiceImpl implements ProductService {
         List<Product> list=productRepository.findAll();
         if(list.isEmpty())throw new ProductException("No product in the database");
         return list;
+    }
+
+    @Override
+    public List<Product> getAllPagedProducts(Pageable pagable) throws ProductException {
+        Page<Product> list = productRepository.findAll(pagable);
+        List<Product> list1=list.stream().toList();
+        if(list1.isEmpty())throw new ProductException("No product found");
+        return list1;
     }
 }
