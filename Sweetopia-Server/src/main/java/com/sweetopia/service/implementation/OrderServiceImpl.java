@@ -32,7 +32,7 @@ public class OrderServiceImpl implements OrderService{
 			orderrepository.save(order);
 			return ord.get();
 		}else {
-			throw new OrderNotFoundException("Order Not Found With this id "+order.getOrderId());
+			throw new OrderNotFoundException("Order with id " + order.getOrderId() + " does not exist");
 		}
 		
 	}
@@ -40,25 +40,56 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public Order cancelSweetOrder(Long orderId) throws OrderNotFoundException {
 		// TODO Auto-generated method stub
-		return null;
+		Optional<Order> ord =orderrepository.findById(orderId);
+		if(ord.isPresent()) {
+			Order od=ord.get();
+			orderrepository.deleteById(orderId);
+			return od;
+		}else {
+			throw new OrderNotFoundException("Order with id " + orderId + " does not exist");
+		}
+		
+		
 	}
 
 	@Override
 	public List<Order> showAllSweetOrder() throws OrderNotFoundException {
 		// TODO Auto-generated method stub
-		return null;
+		List<Order> ord=orderrepository.findAll();
+		if(ord.isEmpty()) {
+			throw new OrderNotFoundException("No Order Found !");
+		}else {
+			return ord;
+		}
+		
 	}
 
 	@Override
 	public List<Order> showAllSweetOrderById(Long orderId) throws OrderNotFoundException {
 		// TODO Auto-generated method stub
-		return null;
+		List<Order> ord=orderrepository.findByOrderId(orderId);
+		if(ord.isEmpty()) {
+			throw new OrderNotFoundException("Order with id " + orderId + " does not exist");
+		}else {
+			return ord;
+		}
+		
+		
 	}
 
 	@Override
 	public double calculateTotalOrdercost(Long orderId) throws OrderNotFoundException {
 		// TODO Auto-generated method stub
-		return 0;
+		List<Order> orders = orderrepository.findByOrderId(orderId);
+        if (orders.isEmpty()) {
+            throw new OrderNotFoundException("Order with id " + orderId + " does not exist");
+        }
+        double totalCost = 0;
+        for (Order order : orders) {
+            totalCost += order.getOrderBill().getTotalCost();
+        }
+        return totalCost;
+		
 	}
 
 }
