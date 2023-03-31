@@ -29,5 +29,7 @@ public class Category {
 	@JsonIgnore
 	private List<Product> products;
 
+	private String categoryImage;
+
 }
 

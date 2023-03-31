@@ -27,6 +27,11 @@ public class ProductController {
         Product p1=productService.addProduct(product);
         return new ResponseEntity<>(p1, HttpStatus.ACCEPTED);
     }
+    @PostMapping("/products/all")
+    public ResponseEntity<List<Product>> addProducts(@Valid @RequestBody List<Product> product) throws ProductException {
+        List<Product> p1=productService.addAllProducts(product);
+        return new ResponseEntity<>(p1, HttpStatus.ACCEPTED);
+    }
     @DeleteMapping("/products/{id}")
     public ResponseEntity<Product> deleteProduct(@PathVariable Long id) throws ProductException {
         Product p1=productService.deleteProduct(id);

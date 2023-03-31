@@ -2,6 +2,7 @@ package com.sweetopia.controller;
 
 import java.util.List;
 
+import com.sweetopia.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -60,6 +61,12 @@ public class CategoryController {
     public ResponseEntity<Category> getCategory(@PathVariable Long categoryId) throws CategoryException {
     	Category category = categoryService.cancelCategory(categoryId);
         return ResponseEntity.ok(category);
+    }
+
+    @GetMapping("/{categoryId}/products")
+    public ResponseEntity<List<Product>> getProductsByCategory(@PathVariable Long categoryId) throws CategoryException {
+        List<Product> products = categoryService.getProductsOfCategory(categoryId);
+        return ResponseEntity.ok(products);
     }
 
    

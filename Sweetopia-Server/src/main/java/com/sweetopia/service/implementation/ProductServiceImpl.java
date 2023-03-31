@@ -4,13 +4,14 @@ import com.sweetopia.entity.Category;
 import com.sweetopia.entity.Product;
 import com.sweetopia.exception.ProductException;
 import com.sweetopia.repository.ProductRepository;
-//import com.sweetopia.repository.CategoryRepository;
+import com.sweetopia.repository.CategoryRepository;
 import com.sweetopia.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,8 +19,8 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
-//    @Autowired
-//    private CategoryRepository categoryRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
 
     @Override
@@ -28,8 +29,8 @@ public class ProductServiceImpl implements ProductService {
             Long id=product.getProductId();
             if(productRepository.findById(id).isPresent())throw new ProductException("Product already present");
         }
-//        Optional<Category> category=categoryRepository.findByCategoryName(product.getCategory().getCategoryName());
-//        if(category.isPresent())product.setCategory(category.get());
+        Optional<Category> category=categoryRepository.findByCategoryName(product.getCategory().getCategoryName());
+        if(category.isPresent())product.setCategory(category.get());
         return productRepository.save(product);
     }
 
@@ -75,5 +76,14 @@ public class ProductServiceImpl implements ProductService {
         List<Product> list1=list.stream().toList();
         if(list1.isEmpty())throw new ProductException("No product found");
         return list1;
+    }
+
+    @Override
+    public List<Product> addAllProducts(List<Product> products) throws ProductException {
+        List<Product> products1=new ArrayList<>();
+        for(Product p:products){
+            products1.add(addProduct(p));
+        }
+        return products1;
     }
 }
