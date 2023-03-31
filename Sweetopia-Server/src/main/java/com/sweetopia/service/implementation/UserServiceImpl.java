@@ -18,8 +18,14 @@ public class UserServiceImpl implements UserService{
 	private UserRepository userRepository;
 
 	@Override
-	public User addUser(User newUser) {
+	public User addUser(User newUser) throws UserNotFoundException {
 		// TODO Auto-generated method stub
+		if(newUser.getId()!=null) {
+			Long id= newUser.getId();
+			if(userRepository.findById(id).isPresent()) {
+				throw new UserNotFoundException();
+			}
+		}
 		User savedUser = userRepository.save(newUser);
 		
 		return savedUser;
