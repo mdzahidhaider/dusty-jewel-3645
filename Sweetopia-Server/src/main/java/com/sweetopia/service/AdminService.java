@@ -14,15 +14,8 @@ import com.sweetopia.exception.UserNotFoundException;
 public interface AdminService {
 	
 	List<User> allUsers() throws UserNotFoundException;
-	
 	List<Customer> allCustomers() throws CustomerNotFoundException;
-
-
-    List<Product> allProducts()throws ProductException;
-
-    List<Category> allCategories() throws CategoryException;
-
-
-
-
+	List<Product> allProducts()throws ProductException;
+	List<Category> allCategories() throws CategoryException;
+	
 }
