@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sweetopia.entity.Product;
 import com.sweetopia.entity.User;
+import com.sweetopia.exception.ProductException;
 import com.sweetopia.exception.UserNotFoundException;
 import com.sweetopia.service.UserService;
 
@@ -27,12 +30,12 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@PersistenceContext
-    private EntityManager entityManager;
+//	@PersistenceContext
+//    private EntityManager entityManager;
 	
 	
 	@PostMapping("/add")
-	public ResponseEntity<User> addUser(@Valid @RequestBody User user){
+	public ResponseEntity<User> addUser(@Valid @RequestBody User user) throws UserNotFoundException{
 		User addedUser = userService.addUser(user);
 		return new ResponseEntity<>(addedUser,HttpStatus.CREATED);
 	}
@@ -45,25 +48,18 @@ public class UserController {
 	
 	
 	
-//	????????????
-	@PatchMapping("/update/{id}")
+
+	@PutMapping("/update/{id}")
 	public ResponseEntity<User> updateUserDetails(@Valid @RequestBody User user, @PathVariable Long id) throws UserNotFoundException{
+		 
+		        user.setId(id);
+		        User updatedUser=userService.updateUserDetails(user);
+		        return new ResponseEntity<>(updatedUser,HttpStatus.ACCEPTED);
+		   
 		
-		user = entityManager.find(User.class, id);
-		if(user!=null) {
-			user.setUserName(user.getUserName());
-			user.setUserPassword(user.getUserPassword());
-			user.setUserType(user.getUserType());
-			
-			return new ResponseEntity<User>(user,HttpStatus.ACCEPTED);
-		
-		}else
-			throw new UserNotFoundException();
-	
 	}
 	
-//	???????????
-	
+
 	@DeleteMapping("delete/{id}")
 	public ResponseEntity<String> deleteUserById(@PathVariable Long id) throws UserNotFoundException{
 		String userDeleted = userService.deleteUser(id);
