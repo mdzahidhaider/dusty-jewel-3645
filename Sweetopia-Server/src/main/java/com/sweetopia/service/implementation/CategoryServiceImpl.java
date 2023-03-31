@@ -3,6 +3,7 @@ package com.sweetopia.service.implementation;
 import java.util.List;
 import java.util.Optional;
 
+import com.sweetopia.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,8 @@ import com.sweetopia.service.CategoryService;
 public class CategoryServiceImpl implements CategoryService{
 	@Autowired
     private CategoryRepository categoryRepository;
+	@Autowired
+	private ProductRepository productRepository;
 	@Override
 	public Category addCategory(Category c) throws CategoryException {
 		// TODO Auto-generated method stub
@@ -95,7 +98,16 @@ public class CategoryServiceImpl implements CategoryService{
 		
 		return cat.get();
 	}
-	
-	
+
+	@Override
+	public List<Product> getProductsOfCategory(Long categoryId) throws CategoryException {
+		Category category=getCategory(categoryId);
+
+		List<Product> products = productRepository.findByCategoryId(categoryId);
+
+		if(products.isEmpty())throw new CategoryException("No products in the given category");
+		return products;
+	}
+
 
 }
