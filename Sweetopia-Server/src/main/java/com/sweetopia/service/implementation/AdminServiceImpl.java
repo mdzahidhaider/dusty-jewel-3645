@@ -72,7 +72,12 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public List<Category> allCategories() throws CategoryException {
 		// TODO Auto-generated method stub
-		return null;
+		List<Category> categoryList = categoryRepository.findAll();
+		if(categoryList.isEmpty()) {
+			throw new CategoryException("No category found");
+		}else
+		
+		return categoryList;
 	}
 
 }
