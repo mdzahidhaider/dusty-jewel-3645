@@ -55,8 +55,14 @@ public class OrderBillController {
 	}
 	
 	@GetMapping("/orderbills/{orderBillId}")
-	public ResponseEntity<OrderBill> showAllOrderBillsById(Long orderBillId) throws OrderBillNotFoundException {
+	public ResponseEntity<OrderBill> showAllOrderBillsById(@PathVariable Long orderBillId) throws OrderBillNotFoundException {
 		OrderBill ordbill = orderbillservice.showAllOrderBillsById(orderBillId);
+		return new ResponseEntity<>(ordbill, HttpStatus.OK);
+	}
+	
+	@GetMapping("/orderbills/{customerId}")
+	public ResponseEntity<List<OrderBill>> showAllBillOfCustomer(@PathVariable Long customerId) throws OrderBillNotFoundException{
+		List<OrderBill> ordbill = orderbillservice.showAllBillOfCustomer(customerId);
 		return new ResponseEntity<>(ordbill, HttpStatus.OK);
 	}
 
