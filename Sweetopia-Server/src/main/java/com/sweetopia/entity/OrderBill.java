@@ -20,7 +20,7 @@ import java.time.LocalDate;
 public class OrderBill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer orderBillId;
+    private Long orderBillId;
 
     @NotNull(message = "Date is not null")
     @NotBlank(message = "Date is not blank")
