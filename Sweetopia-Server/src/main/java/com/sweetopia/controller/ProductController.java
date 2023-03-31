@@ -51,14 +51,20 @@ public class ProductController {
         return new ResponseEntity<>(p1,HttpStatus.OK);
     }
 
-    @GetMapping("/products/paged")
-    public ResponseEntity<List<Product>> getProductsByPage(@RequestParam("page") Integer pageNo,@RequestParam("size") Integer pageSize,@RequestParam(name = "sortBy",required = false) String sort) throws ProductException {
+   @GetMapping("/products/paged")
+    public ResponseEntity<List<Product>> getProductsByPage(@RequestParam("page") Integer pageNo,@RequestParam("size") Integer pageSize,@RequestParam(name = "sortBy",required = false) String sort,@RequestParam(name = "direction",required = false) String dir) throws ProductException {
         Pageable pageable;
         pageNo-=1;
         if(sort==null){
             pageable=PageRequest.of(pageNo,pageSize);
         }else{
-            pageable=PageRequest.of(pageNo,pageSize,Sort.by(sort));
+
+            if(!dir.equals("DESC")){
+                pageable=PageRequest.of(pageNo,pageSize, Sort.Direction.ASC,sort);
+            }else{
+                pageable=PageRequest.of(pageNo,pageSize, Sort.Direction.DESC,sort);
+            }
+
         }
         List<Product> list=productService.getAllPagedProducts(pageable);
         return new ResponseEntity<>(list,HttpStatus.OK);
