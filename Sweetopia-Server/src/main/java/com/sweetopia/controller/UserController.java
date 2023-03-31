@@ -63,7 +63,7 @@ public class UserController {
 	@DeleteMapping("delete/{id}")
 	public ResponseEntity<String> deleteUserById(@PathVariable Long id) throws UserNotFoundException{
 		String userDeleted = userService.deleteUser(id);
-		return new ResponseEntity<String>("User has been deletd "+ userDeleted, HttpStatus.OK);
+		return new ResponseEntity<String>(""+ userDeleted, HttpStatus.OK);
 	}
 	
 	@DeleteMapping("delete")
