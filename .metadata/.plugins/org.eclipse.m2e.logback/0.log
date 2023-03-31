@@ -4201,3 +4201,4 @@ Caused by: java.lang.IllegalArgumentException: Can not set org.apache.maven.shar
 	at com.google.inject.internal.ConstructorBindingImpl$Factory.get(ConstructorBindingImpl.java:306)
 	at com.google.inject.internal.InjectorImpl$1.get(InjectorImpl.java:1050)
 	... 49 common frames omitted
+2023-03-31 08:55:03,018 [Worker-0: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
