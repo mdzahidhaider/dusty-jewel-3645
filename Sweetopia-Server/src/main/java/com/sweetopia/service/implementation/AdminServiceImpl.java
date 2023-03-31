@@ -41,7 +41,7 @@ public class AdminServiceImpl implements AdminService{
 		// TODO Auto-generated method stub
 		List<User> userList = userRepository.findAll();
 		if(userList.isEmpty()) {
-			throw new UserNotFoundException();
+			throw new UserNotFoundException("No user found");
 		}else
 		
 		return userList;
@@ -50,13 +50,23 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public List<Customer> allCustomers() throws CustomerNotFoundException {
 		// TODO Auto-generated method stub
-		return null;
+		List<Customer> customerList = customerRepository.findAll();
+		if(customerList.isEmpty()) {
+			throw new CustomerNotFoundException("No customer found");
+		}else
+		
+		return customerList;
 	}
 
 	@Override
 	public List<Product> allProducts() throws ProductException {
 		// TODO Auto-generated method stub
-		return null;
+		List<Product> productList = productRepository.findAll();
+		if(productList.isEmpty()) {
+			throw new ProductException("No product found");
+		}else
+		
+		return productList;
 	}
 
 	@Override
