@@ -15,19 +15,19 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productId;
 
-    @NotNull
+
     private String name;
 
-    @NotNull
+
     private String photoPath;
 
-    @NotNull
+
     private Double price;
 
-    @NotNull
+
     private String description;
 
-    @NotNull
+
     @Min(1)
     private Integer available;
 

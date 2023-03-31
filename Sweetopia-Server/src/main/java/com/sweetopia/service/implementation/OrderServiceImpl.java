@@ -1,5 +1,6 @@
 package com.sweetopia.service.implementation;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +20,11 @@ public class OrderServiceImpl implements OrderService{
 
 	@Override
 	public Order addSweetOrder(Order order) throws OrderNotFoundException {
-		// TODO Auto-generated method 
+		// TODO Auto-generated method
+		order.setCreatedDate(LocalDate.now());
+
+
+		System.out.println(order.getCreatedDate());
 		if(order.getOrderId()!=null) {
 			Long id=order.getOrderId();
 			if(orderrepository.findById(id).isPresent())throw new OrderNotFoundException("Order already present");

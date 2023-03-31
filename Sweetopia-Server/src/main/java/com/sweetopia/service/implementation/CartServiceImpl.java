@@ -2,27 +2,34 @@ package com.sweetopia.service.implementation;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
+import com.sweetopia.dto.ProductDTO;
+import com.sweetopia.entity.Customer;
+import com.sweetopia.entity.Product;
+import com.sweetopia.exception.ProductException;
+import com.sweetopia.service.CustomerService;
+import com.sweetopia.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.sweetopia.entity.Cart;
 import com.sweetopia.exception.CartNotFoundException;
 import com.sweetopia.exception.InvalidCartException;
 import com.sweetopia.repository.CartRepository;
 import com.sweetopia.service.CartService;
+import org.springframework.stereotype.Service;
 
 @Service
 public class CartServiceImpl implements CartService{
 
 	@Autowired
 	private CartRepository CartRepository;
+	@Autowired
+	private CustomerService customerService;
+	@Autowired
+	private ProductService productService;
 	
-	@Override
-	public Cart addCart(Cart cart) throws InvalidCartException{
-		vlalidateCart(cart);
-		return CartRepository.save(cart);
-	}
+
 
 	@Override
 	public Cart updateCart(Cart cart) {
@@ -30,16 +37,10 @@ public class CartServiceImpl implements CartService{
 		if(!CartRepository.existsById(cart.getCartId())) {
 			throw new CartNotFoundException("Cart not found with ID :"+cart.getCartId());
 		}
-		vlalidateCart(cart);
+
 		return CartRepository.save(cart);
 	}
 
-	@Override
-	public Cart cancelCart(Long cartId) {
-		Cart cart = CartRepository.findById(cartId).orElseThrow(()-> new CartNotFoundException("Cart not found with ID :"+cartId));
-		CartRepository.delete(cart);
-		return cart;
-	}
 
 	@Override
 	public List<Cart> showAllCarts() {
@@ -48,16 +49,53 @@ public class CartServiceImpl implements CartService{
 	}
 
 	@Override
-	public List<Cart> showAllCarts(Long cartId) {
+	public Cart showAllCarts(Long cartId) {
 		Cart cart = CartRepository.findById(cartId).orElseThrow(()-> new CartNotFoundException("Cart not found with ID: "+cartId));
-		return Collections.singletonList(cart);
+		return cart;
 		
 	}
 
-	private void vlalidateCart(Cart cart)throws InvalidCartException{
-		
-		if(cart.getProductCount()<= 0) {
-			throw new InvalidCartException("Cart should have at least one product");
+	@Override
+	public Cart addProductToCart(Long customerId, Long ProductId, Integer quantity) throws ProductException {
+		Customer customer=customerService.getCustomerById(customerId);
+		Product product=productService.getProductById(ProductId);
+		Cart cart = showAllCarts(customer.getCart().getCartId());
+		boolean flag=false;
+		int i=0;
+		for(ProductDTO productDTO:cart.getListProduct()){
+			if(productDTO.getProductId()==ProductId){
+				flag=true;
+				break;
+			}
+			i++;
 		}
+		if(!flag){
+			ProductDTO productDTO=new ProductDTO();
+			productDTO.setProductId(product.getProductId());
+			productDTO.setPrice(product.getPrice());
+			productDTO.setCategoryName(product.getCategory().getCategoryName());
+			productDTO.setDescription(product.getDescription());
+			productDTO.setQuantity(quantity);
+			productDTO.setName(product.getName());
+			cart.getListProduct().add(productDTO);
+			System.out.println(productDTO);
+		}else{
+			cart.getListProduct().get(i).setQuantity(cart.getListProduct().get(i).getQuantity()+quantity);
+		}
+
+
+
+
+
+
+			cart.setProductCount(cart.getProductCount()+quantity);
+			cart.setTotal(cart.getTotal()+(int)(product.getPrice()*quantity));
+			cart.setGrandTotal(cart.getTotal());
+
+
+
+		return CartRepository.save(cart);
 	}
+
+
 }

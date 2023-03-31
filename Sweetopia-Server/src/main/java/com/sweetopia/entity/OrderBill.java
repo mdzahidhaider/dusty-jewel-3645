@@ -22,15 +22,11 @@ public class OrderBill {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderBillId;
 
-    @NotNull(message = "Date is not null")
-    @NotBlank(message = "Date is not blank")
-    @NotEmpty(message = "Date is not empty")
-    @JsonFormat(pattern = "yyyy/MM/dd")
+
+
     private LocalDate createdDate;
 
-    @NotNull(message = "Total cost is not null")
-    @NotBlank(message = "Total cost is not blank")
-    @NotEmpty(message = "Total cost is not empty")
+
     private float totalCost;
 
     @OneToOne(mappedBy = "orderBill", cascade = CascadeType.ALL)

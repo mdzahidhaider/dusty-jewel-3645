@@ -13,5 +13,5 @@ public interface CustomerService {
 	public Customer updateCustomer(Customer customer) throws InvalidCustomerException ;
 	public Customer cancelCustomer(Long CustomerId) throws CustomerNotFoundException;
 	public List<Customer> showAllCustomers();
-	public Optional<Customer> showAllCustomers(Long CustomerId) throws CustomerNotFoundException;
+	public Customer getCustomerById(Long CustomerId) throws CustomerNotFoundException;
 }
