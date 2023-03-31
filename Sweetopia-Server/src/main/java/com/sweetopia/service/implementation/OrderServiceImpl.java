@@ -20,8 +20,13 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public Order addSweetOrder(Order order) throws OrderNotFoundException {
 		// TODO Auto-generated method 
-		Order ord = orderrepository.save(order);
-		return ord;
+		if(order.getOrderId()!=null) {
+			Long id=order.getOrderId();
+			if(orderrepository.findById(id).isPresent())throw new OrderNotFoundException("Order already present");
+            
+		}
+		return orderrepository.save(order);
+		 
 	}
 
 	@Override
