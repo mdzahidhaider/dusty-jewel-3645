@@ -11,11 +11,11 @@ import lombok.Setter;
 
 //@Inheritance(strategy = InheritanceType.JOINED)
 //@DiscriminatorColumn(name = "userType", discriminatorType = DiscriminatorType.STRING)
-@MappedSuperclass
-@Getter
-@Setter
+//@MappedSuperclass
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

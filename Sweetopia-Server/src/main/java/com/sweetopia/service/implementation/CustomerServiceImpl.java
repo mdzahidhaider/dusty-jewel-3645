@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.sweetopia.entity.Customer;
 import com.sweetopia.entity.Order;
@@ -13,6 +14,7 @@ import com.sweetopia.exception.InvalidCustomerException;
 import com.sweetopia.repository.CustomerRepository;
 import com.sweetopia.service.CustomerService;
 
+@Service
 public class CustomerServiceImpl implements CustomerService{
 
 	@Autowired

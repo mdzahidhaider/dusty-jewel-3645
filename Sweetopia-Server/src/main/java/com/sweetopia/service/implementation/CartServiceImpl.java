@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.sweetopia.entity.Cart;
 import com.sweetopia.exception.CartNotFoundException;
@@ -11,6 +12,7 @@ import com.sweetopia.exception.InvalidCartException;
 import com.sweetopia.repository.CartRepository;
 import com.sweetopia.service.CartService;
 
+@Service
 public class CartServiceImpl implements CartService{
 
 	@Autowired
