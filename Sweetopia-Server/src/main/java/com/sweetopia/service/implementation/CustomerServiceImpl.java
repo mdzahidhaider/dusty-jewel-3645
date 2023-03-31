@@ -4,14 +4,17 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.sweetopia.entity.Customer;
 import com.sweetopia.entity.Order;
+import com.sweetopia.entity.User;
 import com.sweetopia.exception.CustomerNotFoundException;
 import com.sweetopia.exception.InvalidCustomerException;
 import com.sweetopia.repository.CustomerRepository;
 import com.sweetopia.service.CustomerService;
 
+@Service
 public class CustomerServiceImpl implements CustomerService{
 
 	@Autowired
@@ -32,6 +35,8 @@ public class CustomerServiceImpl implements CustomerService{
 		
 		Customer existingCustomer = customerRepository.findById(customer.getId()).orElseThrow(()-> new CustomerNotFoundException("customer not found with this id : "+customer.getId()));
 		existingCustomer.setUserName(customer.getUserName());
+		
+		
 		existingCustomer.setOrders(customer.getOrders());
 		existingCustomer.setCart(customer.getCart());
 		
