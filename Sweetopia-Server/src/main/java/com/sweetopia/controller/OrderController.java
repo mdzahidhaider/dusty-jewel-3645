@@ -27,17 +27,17 @@ public class OrderController {
 	
 	
 	
-	@PostMapping("/order")
-	public ResponseEntity<Order> addOrder(@Valid @RequestBody Order order) throws OrderNotFoundException{
-		Order ord=orderservice.addSweetOrder(order);
+	@PostMapping("/{customerId}/order")
+	public ResponseEntity<Order> addOrder(@PathVariable Long customerId,@Valid @RequestBody Order order) throws OrderNotFoundException{
+		Order ord=orderservice.addSweetOrder(customerId,order);
 		return new ResponseEntity<>(ord, HttpStatus.CREATED);
 		
 	}
 	
-	@PutMapping("/orders")
-	public ResponseEntity<Order> UpdateSweetOrder(@Valid @RequestBody Order order) throws OrderNotFoundException {
+	@PutMapping("/{customerID}/orders")
+	public ResponseEntity<Order> UpdateSweetOrder(@PathVariable Long customerID,@Valid @RequestBody Order order) throws OrderNotFoundException {
 		
-		Order ord=orderservice.updateSweetOrder(order);
+		Order ord=orderservice.updateSweetOrder(customerID,order);
 		return new ResponseEntity<>(ord, HttpStatus.OK);
 	}
 	
@@ -55,8 +55,8 @@ public class OrderController {
 	}
 	
 	@GetMapping("/orders/{orderId}")
-	public ResponseEntity<List<Order>>  showAllSweetOrderById(@PathVariable Long orderId) throws OrderNotFoundException{
-		List<Order> ord = orderservice.showAllSweetOrderById(orderId);
+	public ResponseEntity<Order>  showAllSweetOrderById(@PathVariable Long orderId) throws OrderNotFoundException{
+		Order ord = orderservice.showAllSweetOrderById(orderId);
 		return new ResponseEntity<>(ord, HttpStatus.OK);
 		
 	}

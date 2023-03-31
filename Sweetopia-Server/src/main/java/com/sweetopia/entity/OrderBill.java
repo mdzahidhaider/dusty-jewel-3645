@@ -2,6 +2,7 @@ package com.sweetopia.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -24,11 +25,11 @@ public class OrderBill {
 
 
 
-    private LocalDate createdDate;
+    private LocalDate createdDate=LocalDate.now();
 
 
-    private float totalCost;
+    private Double totalCost=0.0;
 
-    @OneToOne(mappedBy = "orderBill", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "orderBill")
     private Order sweetOrder;
 }

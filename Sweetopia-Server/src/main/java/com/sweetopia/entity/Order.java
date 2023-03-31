@@ -2,6 +2,7 @@ package com.sweetopia.entity;
 
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sweetopia.dto.ProductDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,22 +28,22 @@ public class Order {
 
 
 
-    private LocalDate createdDate;
+    private LocalDate createdDate=LocalDate.now();
 
+
+    @Embedded
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "order_products")
-    @MapKeyJoinColumn(name = "product_id")
-    @Column(name = "quantity")
+    @JoinTable(name = "order_Product", joinColumns = @JoinColumn(name = "order_id"))
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private Map<Product, Long> groupedProducts=new HashMap<>();
+    private List<ProductDTO> groupedProducts=new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonIgnore
     private Customer customer;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_bill_id")
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonIgnore
     private OrderBill orderBill;
 }

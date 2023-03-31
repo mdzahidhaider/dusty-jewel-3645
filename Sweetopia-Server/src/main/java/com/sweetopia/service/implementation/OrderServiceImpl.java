@@ -1,9 +1,17 @@
 package com.sweetopia.service.implementation;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.sweetopia.dto.ProductDTO;
+import com.sweetopia.entity.Cart;
+import com.sweetopia.entity.Customer;
+import com.sweetopia.repository.CustomerRepository;
+import com.sweetopia.service.CartService;
+import com.sweetopia.service.CustomerService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,33 +25,64 @@ public class OrderServiceImpl implements OrderService{
 	
 	@Autowired
 	private OrderRepository orderrepository;
+	@Autowired
+	private CustomerService customerService;
+	@Autowired
+	private CartService cartService;
+
 
 	@Override
-	public Order addSweetOrder(Order order) throws OrderNotFoundException {
+	public Order addSweetOrder(Long customerId,Order order) throws OrderNotFoundException {
 		// TODO Auto-generated method
-		order.setCreatedDate(LocalDate.now());
 
-
-		System.out.println(order.getCreatedDate());
-		if(order.getOrderId()!=null) {
-			Long id=order.getOrderId();
-			if(orderrepository.findById(id).isPresent())throw new OrderNotFoundException("Order already present");
-            
+		Customer customer =customerService.getCustomerById(customerId);
+		List<ProductDTO> list=customer.getCart().getListProduct();
+		System.out.println(list);
+		if(list.isEmpty())throw new OrderNotFoundException("Cart is empty add product to cart");
+		Order order1=new Order();
+		order1.setCustomer(customer);
+		for(ProductDTO p:customer.getCart().getListProduct()){
+			order1.getGroupedProducts().add(p);
 		}
-		return orderrepository.save(order);
+
+		Cart cart=cartService.showAllCarts(customer.getCart().getCartId());
+		cart.setGrandTotal(0.0);
+		cart.setTotal(0.0);
+		cart.setProductCount(0);
+		cart.setListProduct(new ArrayList<>());
+		cartService.updateCart(cart);
+
+		return orderrepository.save(order1);
 		 
 	}
 
 	@Override
-	public Order updateSweetOrder(Order order) throws OrderNotFoundException {
+	public Order updateSweetOrder(Long customerId,Order order) throws OrderNotFoundException {
 		// TODO Auto-generated method stub
-		Optional<Order> ord=orderrepository.findById(order.getOrderId());
-		if(ord.isPresent()) {
-			orderrepository.save(order);
-			return ord.get();
-		}else {
-			throw new OrderNotFoundException("Order with id " + order.getOrderId() + " does not exist");
+		Optional<Order> ord;
+		if(order.getOrderId()!=null) {
+			Long id=order.getOrderId();
+			if(orderrepository.findById(id).isEmpty())throw new OrderNotFoundException("Order not found");
+			ord=orderrepository.findById(id);
+		}else{
+			throw new OrderNotFoundException("Order id cannot be null");
 		}
+		Customer customer =customerService.getCustomerById(customerId);
+		boolean flag=false;
+		for(Order order1:customer.getOrders()){
+			if(order1.getOrderId()==order.getOrderId()){
+				flag=true;
+				break;
+			}
+		}
+		if(flag){
+			order.setCustomer(customer);
+			return orderrepository.save(order);
+		}else{
+			throw new OrderNotFoundException("Order with id: "+order.getOrderId()+" does not belong to customer id: "+customerId);
+		}
+
+
 		
 	}
 
@@ -53,8 +92,9 @@ public class OrderServiceImpl implements OrderService{
 		Optional<Order> ord =orderrepository.findById(orderId);
 		if(ord.isPresent()) {
 			Order od=ord.get();
+			od.setCustomer(null);
 			orderrepository.deleteById(orderId);
-			return od;
+			return ord.get();
 		}else {
 			throw new OrderNotFoundException("Order with id " + orderId + " does not exist");
 		}
@@ -75,13 +115,13 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public List<Order> showAllSweetOrderById(Long orderId) throws OrderNotFoundException {
+	public Order showAllSweetOrderById(Long orderId) throws OrderNotFoundException {
 		// TODO Auto-generated method stub
-		List<Order> ord=orderrepository.findByOrderId(orderId);
+		Optional<Order> ord=orderrepository.findById(orderId);
 		if(ord.isEmpty()) {
 			throw new OrderNotFoundException("Order with id " + orderId + " does not exist");
 		}else {
-			return ord;
+			return ord.get();
 		}
 		
 		
@@ -90,15 +130,11 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public double calculateTotalOrdercost(Long orderId) throws OrderNotFoundException {
 		// TODO Auto-generated method stub
-		List<Order> orders = orderrepository.findByOrderId(orderId);
+		Optional<Order> orders = orderrepository.findById(orderId);
         if (orders.isEmpty()) {
             throw new OrderNotFoundException("Order with id " + orderId + " does not exist");
         }
-        double totalCost = 0;
-        for (Order order : orders) {
-            totalCost += order.getOrderBill().getTotalCost();
-        }
-        return totalCost;
+        return orders.get().getOrderBill().getTotalCost();
 		
 	}
 

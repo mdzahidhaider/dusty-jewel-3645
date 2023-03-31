@@ -2,6 +2,7 @@ package com.sweetopia.controller;
 
 import java.util.List;
 
+import com.sweetopia.exception.OrderNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,10 +28,10 @@ public class OrderBillController {
 	@Autowired
 	private OrderBillService orderbillservice;
 	
-	@PostMapping("/orderbill")
-	public ResponseEntity<OrderBill> addOrderBill(@Valid @RequestBody OrderBill orderbill) throws OrderBillNotFoundException{
+	@PostMapping("/{orderId}/orderbill")
+	public ResponseEntity<OrderBill> addOrderBill(@PathVariable Long orderId) throws OrderBillNotFoundException, OrderNotFoundException {
 		
-		OrderBill ordbill = orderbillservice.addOrderBill(orderbill);
+		OrderBill ordbill = orderbillservice.addOrderBill(orderId);
 		return new ResponseEntity<>(ordbill, HttpStatus.CREATED);
 	}
 	
@@ -41,7 +42,7 @@ public class OrderBillController {
 	}
 	
 	@DeleteMapping("/orderbills/{orderBillId}")
-	public ResponseEntity<OrderBill> cancelOrderBill(@PathVariable Long orderBillId) throws OrderBillNotFoundException{
+	public ResponseEntity<OrderBill> cancelOrderBill(@PathVariable Long orderBillId) throws OrderBillNotFoundException, OrderNotFoundException {
 		OrderBill ordbill = orderbillservice.cancelOrderBill(orderBillId);
 		return new ResponseEntity<>(ordbill, HttpStatus.OK);
 	}
