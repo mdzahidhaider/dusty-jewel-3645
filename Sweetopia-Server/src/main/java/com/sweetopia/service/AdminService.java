@@ -28,7 +28,6 @@ public interface AdminService {
 	
 	
 	
-	
-//	Update all
+
 	
 }
