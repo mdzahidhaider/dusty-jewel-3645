@@ -4,10 +4,11 @@ import java.util.List;
 
 import com.sweetopia.entity.Order;
 import com.sweetopia.exception.OrderNotFoundException;
+import com.sweetopia.exception.ProductException;
 
 public interface OrderService {
 
-	public Order addSweetOrder(Long customerId,Order order) throws OrderNotFoundException;
+	public Order addSweetOrder(Long customerId,Order order) throws OrderNotFoundException, ProductException;
 	
 	public Order updateSweetOrder(Long customerId,Order order) throws OrderNotFoundException;
 

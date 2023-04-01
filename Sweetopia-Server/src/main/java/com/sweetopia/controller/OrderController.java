@@ -2,6 +2,7 @@ package com.sweetopia.controller;
 
 import java.util.List;
 
+import com.sweetopia.exception.ProductException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public class OrderController {
 	
 	
 	@PostMapping("/{customerId}/order")
-	public ResponseEntity<Order> addOrder(@PathVariable Long customerId,@Valid @RequestBody Order order) throws OrderNotFoundException{
+	public ResponseEntity<Order> addOrder(@PathVariable Long customerId,@Valid @RequestBody Order order) throws OrderNotFoundException, ProductException {
 		Order ord=orderservice.addSweetOrder(customerId,order);
 		return new ResponseEntity<>(ord, HttpStatus.CREATED);
 		

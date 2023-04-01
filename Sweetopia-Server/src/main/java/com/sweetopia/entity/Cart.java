@@ -24,7 +24,7 @@ public class Cart {
 	private Double total=0.0;
 
 	@Embedded
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
 	@JoinTable(name = "cart_Product", joinColumns = @JoinColumn(name = "cart_id"))
 	private List<ProductDTO> listProduct=new ArrayList<>();
 

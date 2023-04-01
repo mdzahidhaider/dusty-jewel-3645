@@ -9,9 +9,6 @@ public class SweetopiaServerApplication {
 
 	public static void main(String[] args) {
 		ApplicationContext ctx=SpringApplication.run(SweetopiaServerApplication.class, args);
-
-
-
 	}
 
 }

@@ -3,6 +3,8 @@ package com.sweetopia.service.implementation;
 import java.util.List;
 import java.util.Optional;
 
+import com.sweetopia.entity.Address;
+import com.sweetopia.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sweetopia.entity.Customer;
@@ -19,6 +21,8 @@ public class CustomerServiceImpl implements CustomerService{
 
 	@Autowired
 	private CustomerRepository customerRepository;
+	@Autowired
+	private AddressRepository addressRepository;
 
 	@Override
 	public Customer addCustomer(Customer customer)throws InvalidCustomerException {
@@ -67,6 +71,60 @@ public class CustomerServiceImpl implements CustomerService{
 		return customerOption.get();
 
 
+	}
+
+	@Override
+	public Address addAddressToCustomer(Long CustomerId, Address address) throws CustomerNotFoundException {
+		Customer customer=getCustomerById(CustomerId);
+		address.setCustomer(customer);
+		return addressRepository.save(address);
+	}
+
+	@Override
+	public Address updateAddressOfCustomer(Long CustomerId, Long addressId, Address address) throws CustomerNotFoundException {
+		Customer customer=getCustomerById(CustomerId);
+		boolean flag=false;
+		for(Address address1:customer.getAddresses()){
+			if(addressId==address1.getAddId()){
+				flag=true;
+				address.setAddId(addressId);
+				customer.getAddresses().remove(address1);
+				customer.getAddresses().add(address);
+				break;
+			}
+		}
+		if(!flag)throw new CustomerNotFoundException("No address found for customer");
+
+		updateCustomer(customer);
+		return address;
+	}
+
+	@Override
+	public Address deleteAddressOfCustomer(Long CustomerId, Long addressId) throws CustomerNotFoundException {
+		Customer customer=getCustomerById(CustomerId);
+		boolean flag=false;
+		Address address=null;
+		for(Address address1:customer.getAddresses()){
+			if(addressId==address1.getAddId()){
+				flag=true;
+				address=address1;
+				customer.getAddresses().remove(address1);
+				break;
+			}
+		}
+		if(!flag)throw new CustomerNotFoundException("No address found for customer");
+		address.setCustomer(null);
+		addressRepository.delete(address);
+		return address;
+	}
+
+	@Override
+	public List<Address> getAllAddressByCustomerId(Long CustomerId) throws CustomerNotFoundException {
+		Customer customer=getCustomerById(CustomerId);
+		List<Address> list=customer.getAddresses();
+		if(list.isEmpty())throw new CustomerNotFoundException("No address present for the given customer");
+
+		return list;
 	}
 
 }
