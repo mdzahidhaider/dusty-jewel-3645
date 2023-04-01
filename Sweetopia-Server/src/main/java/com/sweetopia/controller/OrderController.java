@@ -29,8 +29,8 @@ public class OrderController {
 	
 	
 	@PostMapping("/{customerId}/order")
-	public ResponseEntity<Order> addOrder(@PathVariable Long customerId,@Valid @RequestBody Order order) throws OrderNotFoundException, ProductException {
-		Order ord=orderservice.addSweetOrder(customerId,order);
+	public ResponseEntity<Order> addOrder(@PathVariable Long customerId) throws OrderNotFoundException, ProductException {
+		Order ord=orderservice.addSweetOrder(customerId);
 		return new ResponseEntity<>(ord, HttpStatus.CREATED);
 		
 	}

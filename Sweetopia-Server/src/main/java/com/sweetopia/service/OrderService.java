@@ -8,7 +8,7 @@ import com.sweetopia.exception.ProductException;
 
 public interface OrderService {
 
-	public Order addSweetOrder(Long customerId,Order order) throws OrderNotFoundException, ProductException;
+	public Order addSweetOrder(Long customerId) throws OrderNotFoundException, ProductException;
 	
 	public Order updateSweetOrder(Long customerId,Order order) throws OrderNotFoundException;
 
