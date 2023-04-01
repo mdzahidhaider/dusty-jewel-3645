@@ -89,4 +89,7 @@ public class CustomerController {
 		Customer customer=customerService.customerLogin(customerDTO.getEmail(),customerDTO.getUserPassword());
 		return new ResponseEntity<>(customer,HttpStatus.ACCEPTED);
 	}
+	
+	
+	
 }

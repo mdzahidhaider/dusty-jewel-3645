@@ -33,5 +33,4 @@ public class Cart {
 	@JsonIgnore
 	private Customer customer;
 
-
 }
