@@ -31,5 +31,6 @@ public class OrderBill {
     private Double totalCost=0.0;
 
     @OneToOne(mappedBy = "orderBill")
+    @JsonIgnore
     private Order sweetOrder;
 }

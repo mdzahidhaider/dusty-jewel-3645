@@ -44,6 +44,6 @@ public class Order {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_bill_id")
-    @JsonIgnore
+
     private OrderBill orderBill;
 }

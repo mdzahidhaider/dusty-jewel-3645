@@ -33,7 +33,7 @@ public class OrderServiceImpl implements OrderService{
 
 
 	@Override
-	public Order addSweetOrder(Long customerId,Order order) throws OrderNotFoundException, ProductException {
+	public Order addSweetOrder(Long customerId) throws OrderNotFoundException, ProductException {
 		// TODO Auto-generated method
 
 		Customer customer =customerService.getCustomerById(customerId);
