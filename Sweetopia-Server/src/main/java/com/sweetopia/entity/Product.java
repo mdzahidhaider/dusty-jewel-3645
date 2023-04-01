@@ -28,7 +28,7 @@ public class Product {
     private String description;
 
 
-    @Min(1)
+    @Min(0)
     private Integer available;
 
     @ManyToOne(cascade = CascadeType.ALL)

@@ -35,6 +35,8 @@ public class Customer{
 	@JoinColumn(name = "cart_id")
 	private Cart cart;
 
+	@OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+	private List<Address> addresses = new ArrayList<>();
 	
 	
 	

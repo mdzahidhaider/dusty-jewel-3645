@@ -30,17 +30,14 @@ public class CartController {
 	}
 	
 	@PutMapping("/{cartId}")
-	public ResponseEntity<Cart> updateCart(@PathVariable Long cartId, @RequestBody Cart cart){
+	public ResponseEntity<Cart> updateCart(@PathVariable Long cartId, @RequestBody Cart cart) throws ProductException {
 		
-		try {
+
 			cart.setCartId(cartId);
 			Cart updatedCart = cartService.updateCart(cart);
 			return new ResponseEntity<Cart>(updatedCart,HttpStatus.OK);
 			
-		}
-		catch(CartNotFoundException e) {
-			return new ResponseEntity<Cart>(HttpStatus.NOT_FOUND);
-		}
+
 	}
 	
 	@GetMapping

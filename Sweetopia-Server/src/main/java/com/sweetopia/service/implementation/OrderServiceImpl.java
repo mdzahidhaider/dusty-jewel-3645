@@ -8,6 +8,7 @@ import java.util.Optional;
 import com.sweetopia.dto.ProductDTO;
 import com.sweetopia.entity.Cart;
 import com.sweetopia.entity.Customer;
+import com.sweetopia.exception.ProductException;
 import com.sweetopia.repository.CustomerRepository;
 import com.sweetopia.service.CartService;
 import com.sweetopia.service.CustomerService;
@@ -32,7 +33,7 @@ public class OrderServiceImpl implements OrderService{
 
 
 	@Override
-	public Order addSweetOrder(Long customerId,Order order) throws OrderNotFoundException {
+	public Order addSweetOrder(Long customerId,Order order) throws OrderNotFoundException, ProductException {
 		// TODO Auto-generated method
 
 		Customer customer =customerService.getCustomerById(customerId);
