@@ -19,4 +19,6 @@ public interface CustomerService {
 	public Address updateAddressOfCustomer(Long CustomerId,Long addressId,Address address)throws CustomerNotFoundException;
 	public Address deleteAddressOfCustomer(Long CustomerId,Long addressId)throws CustomerNotFoundException;
 	public List<Address> getAllAddressByCustomerId(Long CustomerId)throws CustomerNotFoundException;
+
+	public Customer customerLogin(String email,String password)throws CustomerNotFoundException;
 }

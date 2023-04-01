@@ -14,4 +14,5 @@ public interface ProductService {
     public List<Product> getAllProducts()throws ProductException;
     public List<Product> getAllPagedProducts(Pageable pagable)throws ProductException;
     public List<Product> addAllProducts(List<Product> products)throws ProductException;
+    public List<Product> searchByName(String productName);
 }

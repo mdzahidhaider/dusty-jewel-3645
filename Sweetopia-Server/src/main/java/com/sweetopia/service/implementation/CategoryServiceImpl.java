@@ -42,13 +42,10 @@ public class CategoryServiceImpl implements CategoryService{
 	public Category updateCategory(Category c) throws CategoryException {
 		if(c.getCategoryId() != null) {
 			Optional<Category> cat = categoryRepository.findById(c.getCategoryId());
-			Optional<Category> cat1 = categoryRepository.findByCategoryName(c.getCategoryName());
-			if(cat.isPresent()) {
-				throw new CategoryException("category is already present with the given id");
+			if(cat.isEmpty()) {
+				throw new CategoryException("category is not present with the given id");
 			}
-			if(cat1.isPresent()) {
-				throw new CategoryException("category is already present with the given name");
-			}
+
 		}
 		
 		 return categoryRepository.save(c);
@@ -61,7 +58,8 @@ public class CategoryServiceImpl implements CategoryService{
 		if(c.isEmpty()) {
 			throw new CategoryException("Category not found");
 		}
-		categoryRepository.deleteById(categoryId);
+
+		categoryRepository.delete(c.get());
 		return c.get();
 	}
 

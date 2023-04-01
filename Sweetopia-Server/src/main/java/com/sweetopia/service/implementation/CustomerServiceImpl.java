@@ -26,7 +26,8 @@ public class CustomerServiceImpl implements CustomerService{
 
 	@Override
 	public Customer addCustomer(Customer customer)throws InvalidCustomerException {
-
+		Optional<Customer> customer2 =customerRepository.findByEmail(customer.getEmail());
+		if(customer2.isPresent())throw new InvalidCustomerException(customer.getEmail()+" email already registered!");
 		if (customer.getId() != null) {
 			if(customerRepository.findById(customer.getId()).isPresent())throw new InvalidCustomerException("User with id:"+customer.getId()+" already present");
 		}
@@ -125,6 +126,13 @@ public class CustomerServiceImpl implements CustomerService{
 		if(list.isEmpty())throw new CustomerNotFoundException("No address present for the given customer");
 
 		return list;
+	}
+
+	@Override
+	public Customer customerLogin(String email, String password) throws CustomerNotFoundException {
+		Optional<Customer> customer=customerRepository.findByEmailAndUserPassword(email,password);
+		if(customer.isEmpty())throw new CustomerNotFoundException("Invalid credentials");
+		return customer.get();
 	}
 
 }
