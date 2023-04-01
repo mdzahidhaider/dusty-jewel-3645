@@ -3,6 +3,7 @@ package com.sweetopia.controller;
 import java.util.List;
 
 import com.sweetopia.dto.CustomerDTO;
+import com.sweetopia.dto.CustomerLoginDTO;
 import com.sweetopia.entity.Address;
 import com.sweetopia.entity.Cart;
 import jakarta.validation.Valid;
@@ -32,9 +33,10 @@ public class CustomerController {
 		Customer customer=new Customer();
 		customer.setUserName(customerDTO.getUserName());
 		customer.setUserPassword(customerDTO.getUserPassword());
+		customer.setEmail(customerDTO.getEmail());
 		Cart cart=new Cart();
 		customer.setCart(cart);
-			System.out.println(customerDTO);
+
 			customerService.addCustomer(customer);
 			return ResponseEntity.status(HttpStatus.CREATED).body(customer);
 
@@ -80,5 +82,11 @@ public class CustomerController {
 	public ResponseEntity<Address> deleteAddress(@PathVariable Long customerId,@PathVariable Long addressId){
 		Address address1=customerService.deleteAddressOfCustomer(customerId,addressId);
 		return new ResponseEntity<>(address1,HttpStatus.ACCEPTED);
+	}
+	@PostMapping("/login")
+	public ResponseEntity<Customer> loginCustomer(@RequestBody CustomerLoginDTO customerDTO){
+
+		Customer customer=customerService.customerLogin(customerDTO.getEmail(),customerDTO.getUserPassword());
+		return new ResponseEntity<>(customer,HttpStatus.ACCEPTED);
 	}
 }

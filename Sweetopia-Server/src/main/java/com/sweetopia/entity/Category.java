@@ -21,11 +21,11 @@ import lombok.NoArgsConstructor;
 public class Category {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long categoryId;
 
 	private String categoryName;
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "category",cascade = CascadeType.ALL,orphanRemoval = true)
 	@JsonIgnore
 	private List<Product> products;
 
