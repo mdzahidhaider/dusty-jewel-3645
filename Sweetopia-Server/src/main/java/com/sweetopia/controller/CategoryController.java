@@ -61,7 +61,7 @@ public class CategoryController {
     
     @GetMapping("/{categoryId}")
     public ResponseEntity<Category> getCategory(@PathVariable Long categoryId) throws CategoryException {
-    	Category category = categoryService.cancelCategory(categoryId);
+    	Category category = categoryService.getCategory(categoryId);
         return ResponseEntity.ok(category);
     }
 
