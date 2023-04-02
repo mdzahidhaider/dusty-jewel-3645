@@ -125,42 +125,49 @@
 
   function displayProducts(data) {
   
+    let user=JSON.parse(localStorage.getItem("user")) || null;
 
     let Product_div = document.getElementById("cardAppend");
-    Product_div.innerHTML=null;
+    Product_div.innerHTML="";
     let productList = document.createElement("div");
-
+// console.log(data)
     data.forEach(ele => {
-       let div = document.createElement("div");
-       div.setAttribute("class","products")
-
-       let img = document.createElement("img");
-       img.src=ele.photoPath;
-
-       let name = document.createElement("h3");
-       name.innerText=ele.name;
-
-       let des = document.createElement("p");
-       des.innerText=ele.description;
-
-       let price = document.createElement("p");
-       price.innerText=ele.price+" "+"Rs";
-       price.setAttribute("class","price");
-
-       let button = document.createElement("button");
-       button.innerText="Add To Cart";
-       button.setAttribute("class","AddToCart")
-       button.addEventListener("click",function(data){
-     
-        localStorage.setItem("product",Json.stringify(data))
-         AddToCart(data);
-
-          
-       })
-       div.append(img,name,des,price,button);
-       Product_div.append(div);
+        Product_div.innerHTML+=`
+        <div class="products">
+            <img data-id=${ele.productId} src=${ele.photoPath}>
+            <h3>${Text=ele.name}</h3>
+            <p>${ele.description}</p>
+            <p class="price">${ele.price} Rs</p>
+            <button data-id=${ele.productId} id="AddToCart${ele.productId}" class="AddToCart">Add To Cart</button>
+            </div>
+        `
+       
+      
     });
+
+    let addToCartButtons=document.querySelectorAll(".AddToCart");
+    addToCartButtons.forEach((e)=>{
+        e.addEventListener("click",()=>{
+            if(user==null){
+                    window.alert("please login first");
+            }else{
+                addToCartFunc(e.dataset.id,user.customerId)
+            }
+        })
+    })
     // productsContainer.appendChild(productList);
+  }
+  async function addToCartFunc(productId,customerId){
+        let res=await fetch(`http://localhost:8080/sweetopia/carts?customerId=${customerId}&productId=${productId}&quantity=1`,{
+            method:"POST"
+        })
+        if(res.ok){
+            window.alert("successfully added to cart")
+           
+        }else{
+            let data=await res.json();
+            window.alert(data.message);
+        }
   }
 
   fetch("http://localhost:8080/sweetopia/categories")
@@ -208,7 +215,7 @@ async function getProductsByCategory(){
             }
 
             function AddToCart(data){
-                localStorage.setItem("product",Json.stringify(data))
+                
                 window.location.href="./cart.html";
             }
 }

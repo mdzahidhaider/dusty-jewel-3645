@@ -1,0 +1,82 @@
+/* Reset styles to ensure consistency across browsers */
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+/* Styles for the container of the cart items */
+.cart-container {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+/* Styles for the header of the page */
+h1 {
+	font-size: 24px;
+	margin-bottom: 20px;
+}
+
+/* Styles for the list of cart items */
+.cart-items {
+	list-style: none;
+	margin-bottom: 30px;
+
+}
+.cart-items{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 25px;
+
+}
+.cart-item img{
+    width: 100%;
+
+}
+.cart-item span{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Styles for each individual cart item */
+.cart-item {
+
+	display: grid;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	border: 1px solid #ccc;
+}
+
+/* Styles for the product name and price */
+.item-name, .item-price {
+	font-size: 16px;
+}
+
+/* Styles for the remove button */
+.remove-item {
+	background-color: #f44336;
+	color: #fff;
+	padding: 8px 16px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 14px;
+}
+
+/* Styles for the cart total section */
+.cart-total {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #f2f2f2;
+	padding: 10px;
+}
+
+/* Styles for the total price */
+.total-price {
+	font-weight: bold;
+	font-size: 20px;
+}
