@@ -4327,3 +4327,6 @@ Caused by: java.lang.IllegalArgumentException: Can not set org.apache.maven.shar
 2023-04-02 10:46:17,371 [Worker-37: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource
 2023-04-02 10:46:17,602 [Worker-37: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource
 2023-04-02 10:46:17,607 [Worker-37: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Desktop\dusty-jewel-3645\Sweetopia-Server\src\test\resources
+2023-04-02 10:48:51,493 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource
+2023-04-02 10:48:51,766 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource
+2023-04-02 10:48:51,774 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Desktop\dusty-jewel-3645\Sweetopia-Server\src\test\resources
