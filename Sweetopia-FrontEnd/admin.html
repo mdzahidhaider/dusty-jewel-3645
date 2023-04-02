@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweetopia Admin</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="container">
+        <div id="options">
+            <div class="admin-operation products">products</div>
+            <div class="admin-operation Categories">Categories</div>
+            <div class="admin-operation Orders">Orders</div>
+            <div class="admin-operation logout">logout</div>
+        </div>
+        <div id="display">
+            <div id="operations">
+                <h1 id="operation-text">Products</h1>
+                <div id="box">
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div id="productForm" class="none">
+            <div id="FormHead"><i id="formheadText">Add Product</i> <i class="fa-solid fa-xmark" id="productCancel"></i></div>
+            <form id="productFormac">
+                <input type="text" placeholder="product name">
+                <input type="text" placeholder="image url">
+                <input type="number" placeholder="price">
+                <input type="number" placeholder="availability">
+                <input type="submit" value="Add product">
+            </form>
+    </div>
+    
+    
+</body>
+<script src="admin.js"></script>
+</html>
