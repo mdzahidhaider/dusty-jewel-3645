@@ -38,7 +38,7 @@ function dynamicClothingSection(ob) {
   boxLink.appendChild(detailsDiv);
   detailsDiv.appendChild(h3);
   // detailsDiv.appendChild(h4);
-  detailsDiv.appendChild(h2);
+  // detailsDiv.appendChild(h2);
 
   return boxDiv;
 }
