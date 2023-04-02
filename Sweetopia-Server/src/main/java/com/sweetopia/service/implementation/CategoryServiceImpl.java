@@ -40,14 +40,20 @@ public class CategoryServiceImpl implements CategoryService{
 
 	@Override
 	public Category updateCategory(Category c) throws CategoryException {
+		System.out.println(c);
+		Category category=null;
 		if(c.getCategoryId() != null) {
 			Optional<Category> cat = categoryRepository.findById(c.getCategoryId());
+
 			if(cat.isEmpty()) {
 				throw new CategoryException("category is not present with the given id");
 			}
+			category=cat.get();
 
 		}
-		
+		category.setCategoryName(c.getCategoryName());
+		category.setCategoryImage(c.getCategoryImage());
+
 		 return categoryRepository.save(c);
 		
 	}
