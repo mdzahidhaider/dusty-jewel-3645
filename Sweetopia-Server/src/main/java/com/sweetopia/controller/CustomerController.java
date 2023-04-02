@@ -21,7 +21,8 @@ import com.sweetopia.service.CustomerService;
 
 
 @RestController
-@RequestMapping("/customers")
+@RequestMapping("/sweetopia/customers")
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 public class CustomerController {
 
 	

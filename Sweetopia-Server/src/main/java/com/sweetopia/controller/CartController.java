@@ -16,7 +16,8 @@ import com.sweetopia.service.CartService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
-@RequestMapping("/carts")
+@RequestMapping("/sweetopia/carts")
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 public class CartController {
 
 	@Autowired
