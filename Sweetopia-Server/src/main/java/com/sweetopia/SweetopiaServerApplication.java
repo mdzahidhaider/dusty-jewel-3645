@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationContext;
 public class SweetopiaServerApplication {
 
 	public static void main(String[] args) {
-		ApplicationContext ctx=SpringApplication.run(SweetopiaServerApplication.class, args);
+		SpringApplication.run(SweetopiaServerApplication.class, args);
 	}
 
 }

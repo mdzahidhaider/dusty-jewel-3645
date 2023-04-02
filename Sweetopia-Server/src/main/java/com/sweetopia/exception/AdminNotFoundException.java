@@ -1,12 +1,12 @@
 package com.sweetopia.exception;
 
-public class UserNotFoundException extends Exception{
+public class AdminNotFoundException extends Exception{
 	
-	public UserNotFoundException() {
+	public AdminNotFoundException() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public UserNotFoundException(String message) {
+	public AdminNotFoundException(String message) {
 		// TODO Auto-generated constructor stub
 		super(message);
 	}

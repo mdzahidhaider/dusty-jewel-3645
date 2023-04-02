@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sweetopia.entity.Customer;
 import com.sweetopia.entity.Order;
-import com.sweetopia.entity.User;
+
 import com.sweetopia.exception.CustomerNotFoundException;
 import com.sweetopia.exception.InvalidCustomerException;
 import com.sweetopia.repository.CustomerRepository;

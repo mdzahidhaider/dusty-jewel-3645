@@ -1,36 +1,30 @@
 package com.sweetopia.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
+import javax.persistence.Column;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-//@Inheritance(strategy = InheritanceType.JOINED)
-//@DiscriminatorColumn(name = "userType", discriminatorType = DiscriminatorType.STRING)
-//@MappedSuperclass
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+
+
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
+@Table(name = "users")
 public class User {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
 
-	@NotNull
-	private String userName;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-//	@Pattern(regexp = "^(?=.[a-z])(?=.[A-Z]).{8,}$", message = "Eight characters long and at least one upper and one lower")
-	private String userPassword;
+    @Column(unique = true)
+    private String username;
 
-//	@Column(name = "userType", insertable = false, updatable = false)
-	@Pattern(regexp = "^(admin|customer)$", message = "Type can only be admin or customer")
-	private String userType;
+    private String password;
 
-
-	
+    
 }
+

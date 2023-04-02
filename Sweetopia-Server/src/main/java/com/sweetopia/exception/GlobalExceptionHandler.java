@@ -11,8 +11,8 @@ import org.springframework.web.context.request.WebRequest;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 	
-	@ExceptionHandler(UserNotFoundException.class)
-	public ResponseEntity<String> noUserFoundException(UserNotFoundException unf, WebRequest wr){
+	@ExceptionHandler(AdminNotFoundException.class)
+	public ResponseEntity<String> noUserFoundException(AdminNotFoundException unf, WebRequest wr){
 		ErrorDetails ed = new ErrorDetails();
 		ed.setTimestamp(LocalDate.now());
 		ed.setMessage(unf.getMessage());
