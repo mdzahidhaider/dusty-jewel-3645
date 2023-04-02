@@ -50,11 +50,13 @@ public class CategoryServiceImpl implements CategoryService{
 			}
 			category=cat.get();
 
+		}else{
+			throw new CategoryException("category id cannot be null");
 		}
 		category.setCategoryName(c.getCategoryName());
 		category.setCategoryImage(c.getCategoryImage());
 
-		 return categoryRepository.save(c);
+		 return categoryRepository.save(category);
 		
 	}
 
@@ -97,9 +99,10 @@ public class CategoryServiceImpl implements CategoryService{
 	public Category getCategory(Long categoryId) throws CategoryException {
 		// TODO Auto-generated method stub
 		Optional<Category> cat = categoryRepository.findById(categoryId);
-		if(cat.isEmpty()) 
+
+		if(cat.isEmpty()) {
 			throw new CategoryException("Category not found");
-		
+		}
 		return cat.get();
 	}
 
