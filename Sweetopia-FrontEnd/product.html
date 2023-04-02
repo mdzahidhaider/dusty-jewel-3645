@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product-Page</title>
+    <style>
+        #filters{
+      
+            padding: 20px;
+
+            margin-left: 35px;
+        }
+        .category{
+            padding: 100px;
+            margin-left: 30px;
+
+        }
+
+        .fetch-button{
+            padding: 10px;
+            background-color: rgb(25, 68, 82);
+            border-radius: 6px;
+            border: none;
+            font-size: 20px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            cursor: pointer;
+            font-weight: 800;
+            color: rgb(239, 239, 249);
+        }
+        .fetch-button:hover{
+            color: rgb(108, 204, 236);
+        }
+        #cardAppend{
+            width: 100%;
+            /* border: 1px solid  red; */
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            margin: auto;
+            height: auto;
+            margin-top: 30px;
+        }
+        .products{
+            
+            width: 80%;
+            margin: auto;
+            gap: 20px;
+            border: 0px solid red;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            padding: 10px;
+            height: 450px;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            /* background-color: rgb(241, 198, 238); */
+        }
+        .products img{
+            width: 100%;
+            height: 250px;
+            border-top-right-radius: 10px;
+            border-top-left-radius: 10px;
+            }
+
+            .products button{
+                padding: 5px;
+                text-decoration: none;
+                font-weight: 600;
+                border-radius: 3px;
+                border: 0.5px solid grey;
+
+                
+            }
+            .products button:hover{
+                cursor: pointer;
+                color: white;
+                background-color: rgb(53, 53, 105);
+            }
+            .products h3{
+             text-align: center;
+             color: rgb(73, 73, 131);
+            }
+            .products p{
+               
+                text-align: center;
+                font-size: 15px;
+                font-weight: 400;
+            }
+            .price{
+                color: red;
+                font-size: 1000px;
+                font-weight: 800;
+            }
+            .AddToCart{
+                margin-left: 110px;
+            }
+    </style>
+</head>
+<body>
+
+    <!-- navbarr code will be paste here -->
+
+    <div id="filters">
+        <select name="categories" id="category" style="padding: 20px; background-color: rgb(155, 177, 218); color: aliceblue; font-size: 20px; font-weight: 600;
+        ">
+           
+        </select>
+    </div>
+
+
+    <!-- card code starts from here  -->
+    <div id="cardAppend">
+      
+    </div>
+    <!-- card code ends here  -->
+
+
+
+
+    <!-- footer code will be paste here  -->
+</body>
+<script>
+
+ 
+ 
+
+  function displayProducts(data) {
+  
+
+    let Product_div = document.getElementById("cardAppend");
+    Product_div.innerHTML=null;
+    let productList = document.createElement("div");
+
+    data.forEach(ele => {
+       let div = document.createElement("div");
+       div.setAttribute("class","products")
+
+       let img = document.createElement("img");
+       img.src=ele.photoPath;
+
+       let name = document.createElement("h3");
+       name.innerText=ele.name;
+
+       let des = document.createElement("p");
+       des.innerText=ele.description;
+
+       let price = document.createElement("p");
+       price.innerText=ele.price+" "+"Rs";
+       price.setAttribute("class","price");
+
+       let button = document.createElement("button");
+       button.innerText="Add To Cart";
+       button.setAttribute("class","AddToCart")
+       button.addEventListener("click",function(data){
+     
+        localStorage.setItem("product",Json.stringify(data))
+         AddToCart(data);
+
+          
+       })
+       div.append(img,name,des,price,button);
+       Product_div.append(div);
+    });
+    // productsContainer.appendChild(productList);
+  }
+
+  fetch("http://localhost:8080/sweetopia/categories")
+    .then(response => response.json())
+    .then(data => {
+        displayCategories(data);
+        
+    })
+    .catch(error => console.error(error));
+
+
+let category=document.getElementById("category");
+
+function displayCategories(array){
+    category.innerHTML=`<option value=0>All categories</option>`
+    for(let a of array){
+        category.innerHTML+= `<option value=${a.categoryId}>${a.categoryName}</option>`
+    }
+    category.addEventListener("change",()=>{
+        getProductsByCategory();
+    })
+}
+getProductsByCategory();
+async function getProductsByCategory(){
+    let id=category.value;
+            if(id==0){
+                let res = await fetch(`http://localhost:8080/sweetopia/products`);
+                if(res.ok){
+                    let data = await res.json();
+                    console.log(data)
+                    displayProducts(data);
+                }else{
+                    window.alert("Something went wrong")
+                }
+            }else{
+                let res = await fetch(`http://localhost:8080/sweetopia/categories/${id}/products`);
+                if(res.ok){
+                    let data = await res.json();
+                    console.log(data)
+                    displayProducts(data);
+                }else{
+                    window.alert("Something went wrong")
+                }
+                // http://localhost:8080/sweetopia/categories/1/products
+            }
+
+            function AddToCart(data){
+                localStorage.setItem("product",Json.stringify(data))
+                window.location.href="./cart.html";
+            }
+}
+
+</script>
+</html>
