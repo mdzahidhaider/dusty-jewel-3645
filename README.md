@@ -28,9 +28,30 @@ Sweetopia is a virtual store that specializes in selling a variety of sweets, ca
 ### <h2><i>💻 Databases</i></h2>
 ![MySQL](https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white)
 
-### Modules
-- Admin Module
-- User Module
+
+
+## Landing Page
+<img src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2023-04-03/LandingPage_528267.png"/>
+
+## Product Page
+<img src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2023-04-03/productPage_982896.png"/>
+
+## Admin Page
+<img src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2023-04-03/AdminPage_698492.png"/>
+
+## SignUp Page
+<img src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2023-04-03/signup_319080.png"/>
+
+## Order and Bill Controller
+<img src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2023-04-03/orderAndOrderBillController_708469.png"/>
+
+## Product Controller
+<img src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2023-04-03/productController_810068.png"/>
+
+## ER Diagram
+<img src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2023-04-03/Er_929559.jpeg"/>
+
+## Modules
 - Product Module
 - Customer Module
 - Category Module
