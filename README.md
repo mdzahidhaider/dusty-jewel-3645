@@ -51,6 +51,16 @@ Sweetopia is a virtual store that specializes in selling a variety of sweets, ca
 ## ER Diagram
 <img src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2023-04-03/Er_929559.jpeg"/>
 
+## API Root Endpoint
+
+```
+https://localhost:8080/
+```
+
+```
+http://localhost:8080/swagger-ui/index.html
+```
+
 ## Modules
 - Product Module
 - Customer Module
