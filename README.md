@@ -42,8 +42,17 @@ Sweetopia is a virtual store that specializes in selling a variety of sweets, ca
 ## SignUp Page
 <img src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2023-04-03/signup_319080.png"/>
 
+## Category Controller
+<img src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2023-04-10/categoryController_679746.png"/>
+
+## Cart Controller
+<img src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2023-04-10/CartController_512843.png"/>
+
 ## Order and Bill Controller
 <img src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2023-04-03/orderAndOrderBillController_708469.png"/>
+
+## Customer Controller
+<img src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2023-04-10/CustomerController_534541.png"/>
 
 ## Product Controller
 <img src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2023-04-03/productController_810068.png"/>
