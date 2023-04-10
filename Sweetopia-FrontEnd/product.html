@@ -5,13 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product-Page</title>
+    <script src="https://kit.fontawesome.com/4a3b1f73a2.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <!-- slider links -->
+    <!-- <script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> -->
+    <script src="js/jQuery3.4.1.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
     <style>
+        #blank{
+            height: 100px;
+        }
         #filters{
-      
             padding: 20px;
-
             margin-left: 35px;
         }
+
         .category{
             padding: 100px;
             margin-left: 30px;
@@ -98,7 +107,20 @@
 <body>
 
     <!-- navbarr code will be paste here -->
+    <div id="1"></div>
+    <script>
+        load("header.html");
+        function load(url)
+        {
+            req = new XMLHttpRequest();
+            req.open("GET", url, false);
+            req.send(null);
+            document.getElementById(1).innerHTML = req.responseText;
+        }
+    </script>
+    <div id="blank">
 
+    </div>
     <div id="filters">
         <select name="categories" id="category" style="padding: 20px; background-color: rgb(155, 177, 218); color: aliceblue; font-size: 20px; font-weight: 600;
         ">
@@ -111,6 +133,17 @@
     <div id="cardAppend">
       
     </div>
+    <div id="4"></div>
+    <script>
+        load("footer.html");
+        function load(url)
+        {
+            req = new XMLHttpRequest();
+            req.open("GET", url, false);
+            req.send(null);
+            document.getElementById(4).innerHTML = req.responseText;
+        }
+    </script>
     <!-- card code ends here  -->
 
 
@@ -149,20 +182,22 @@
     addToCartButtons.forEach((e)=>{
         e.addEventListener("click",()=>{
             if(user==null){
-                    window.alert("please login first");
+                   window.location.href="/signupLogin.html"
             }else{
-                addToCartFunc(e.dataset.id,user.customerId)
+                addToCartFunc(e.dataset.id,user.id)
             }
         })
     })
     // productsContainer.appendChild(productList);
   }
+  
   async function addToCartFunc(productId,customerId){
         let res=await fetch(`http://localhost:8080/sweetopia/carts?customerId=${customerId}&productId=${productId}&quantity=1`,{
             method:"POST"
         })
         if(res.ok){
             window.alert("successfully added to cart")
+            getCartForBadge()
            
         }else{
             let data=await res.json();
@@ -220,5 +255,17 @@ async function getProductsByCategory(){
             }
 }
 
+getCartForBadge()
+async function getCartForBadge(){
+    let use=JSON.parse(localStorage.getItem("user"))
+    let res = await fetch("http://localhost:8080/sweetopia/carts/"+use.cart.cartId);
+    let data= await res.json();
+    if(res.ok){
+        let badge=document.getElementById("badge").innerHTML=data.productCount;
+    }else{
+        let badge=document.getElementById("badge").innerHTML=0;
+    }
+    
+}
 </script>
 </html>

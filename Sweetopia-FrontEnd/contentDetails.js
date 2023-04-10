@@ -1,5 +1,6 @@
 console.clear()
 
+window.location.href="product.html"
 let id = location.search.split('?')[1]
 console.log(id)
 

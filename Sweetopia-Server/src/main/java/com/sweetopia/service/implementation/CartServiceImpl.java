@@ -118,7 +118,7 @@ public class CartServiceImpl implements CartService{
 			productService.updateProduct(product);
 
 			cart.setProductCount(cart.getProductCount()+quantity);
-			cart.setTotal(cart.getTotal()+(int)(product.getPrice()*quantity));
+			cart.setTotal(cart.getTotal()+(product.getPrice()*quantity));
 			cart.setGrandTotal(cart.getTotal());
 
 

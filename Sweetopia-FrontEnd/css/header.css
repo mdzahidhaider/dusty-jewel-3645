@@ -2,6 +2,7 @@ body
 {
     margin: 0;
 }
+
 #badge
 {
     position: absolute;
@@ -308,4 +309,8 @@ body
         right: 62px;
         top: 18px;
     }
+}
+
+i{
+    color: white;
 }
