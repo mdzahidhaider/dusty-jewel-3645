@@ -2,9 +2,13 @@ let box=document.getElementById("box");
 let text=document.getElementById("operation-text");
 let options=document.querySelectorAll(".admin-operation");
 let addProductForm=document.getElementById("addproductbutton");
+
+
 // console.log(addProductButton)
 let baseurl="http://localhost:8080/sweetopia"
 getProducts()
+
+
 
 
 options.forEach(a=>{

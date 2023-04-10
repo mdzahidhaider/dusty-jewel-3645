@@ -68,6 +68,9 @@ h1 {
 
 /* Styles for the cart total section */
 .cart-total {
+	
+	width: 100%;
+	font-size: 30px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -75,8 +78,118 @@ h1 {
 	padding: 10px;
 }
 
+#cart-checkout{
+	padding: 5px 20px;
+	font-size: 20px;
+	color: white;
+	background-color: black;
+	cursor: pointer;
+	border-radius: 30px;
+}
+#blank{
+	height: 150px;
+}
 /* Styles for the total price */
 .total-price {
 	font-weight: bold;
 	font-size: 20px;
 }
+
+
+.products{
+            
+	width: 80%;
+	margin: auto;
+	gap: 20px;
+	border: 0px solid red;
+	border-radius: 10px;
+	margin-bottom: 20px;
+	padding: 10px;
+	height: 450px;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+	/* background-color: rgb(241, 198, 238); */
+}
+.products img{
+	width: 100%;
+	height: 250px;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+	}
+
+	.products button{
+		padding: 5px;
+		text-decoration: none;
+		font-weight: 600;
+		border-radius: 3px;
+		border: 0.5px solid grey;
+
+		
+	}
+	.products button:hover{
+		cursor: pointer;
+		color: white;
+		background-color: rgb(53, 53, 105);
+	}
+	.products h3{
+	 text-align: center;
+	 color: rgb(73, 73, 131);
+	}
+	.products p{
+	   
+		text-align: center;
+		font-size: 15px;
+		font-weight: 400;
+	}
+	.price{
+		color: red;
+		font-size: 1000px;
+		font-weight: 800;
+	}
+	.AddToCart{
+		margin-left: 110px;
+	}
+
+	#filters{
+		padding: 20px;
+		margin-left: 35px;
+	}
+
+	.category{
+		padding: 100px;
+		margin-left: 30px;
+
+	}
+
+	.fetch-button{
+		padding: 10px;
+		background-color: rgb(25, 68, 82);
+		border-radius: 6px;
+		border: none;
+		font-size: 20px;
+		font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+		cursor: pointer;
+		font-weight: 800;
+		color: rgb(239, 239, 249);
+	}
+	.fetch-button:hover{
+		color: rgb(108, 204, 236);
+	}
+	#cardAppend{
+		width: 90%;
+		/* border: 1px solid  red; */
+		display: grid;
+		grid-template-columns: repeat(4,1fr);
+		margin: auto;
+		height: auto;
+		margin-top: 30px;
+	}
+
+	h1{
+		text-align: center;
+	}
+
+	
+
+	i{
+		color: white;
+	}

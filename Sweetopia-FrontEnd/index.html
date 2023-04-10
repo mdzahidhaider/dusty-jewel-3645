@@ -32,7 +32,9 @@
         }
     </script>
     <!-- SLIDER -->
-    <div id="2"></div>
+    <div id="2">
+
+    </div>
     <script>
         load("slider.html");
         function load(url)
@@ -86,6 +88,20 @@
         autoplaySpeed: 1500,
         });
     });
+    getCartForBadge()
+async function getCartForBadge(){
+    let use=JSON.parse(localStorage.getItem("user"))
+    let res = await fetch("http://localhost:8080/sweetopia/carts/"+use.cart.cartId);
+    let data= await res.json();
+    if(res.ok){
+        let badge=document.getElementById("badge").innerHTML=data.productCount;
+    }else{
+        let badge=document.getElementById("badge").innerHTML=0;
+    }
+    
+
+    
+}
 </script>
 <!-- slider JS ENDS -->
 
