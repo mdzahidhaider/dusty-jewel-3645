@@ -67,7 +67,7 @@ https://localhost:8080/
 ```
 
 ```
-http://localhost:8080/swagger-ui/index.html
+http://localhost:8888/swagger-ui/index.html
 ```
 
 ## Modules
