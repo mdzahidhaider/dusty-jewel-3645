@@ -11,7 +11,7 @@
 //
 //    private String password;
 //
-//    @Column(name = "is_admin")
+//    @Column(name = "is_admin") 
 //    private boolean isAdmin;
 //
 //    // getters and setters omitted for brevity
