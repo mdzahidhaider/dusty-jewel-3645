@@ -25,7 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CartServiceImpl implements CartService{
 
-	@Autowired
+	@Autowired(required = false)
 	private CartRepository CartRepository;
 	@Autowired
 	private CustomerService customerService;

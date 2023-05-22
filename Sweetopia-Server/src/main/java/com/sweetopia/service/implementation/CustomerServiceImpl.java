@@ -19,9 +19,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomerServiceImpl implements CustomerService{
 
-	@Autowired
+	@Autowired(required = false)
 	private CustomerRepository customerRepository;
-	@Autowired
+	@Autowired(required = false)
 	private AddressRepository addressRepository;
 
 	@Override
